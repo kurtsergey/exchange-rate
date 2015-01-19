@@ -1,0 +1,19 @@
+﻿.exchange-rate-icon
+{
+    background-color: #4fba6f;
+    color: #f1e810;
+    border-radius: 50%;
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    text-align: center;
+    font-size: 10px;
+    line-height: 16px;
+    vertical-align: middle;
+    font-weight: normal;
+}
+
+    .exchange-rate-icon.usd:after
+    {
+        content: "$";
+    }
