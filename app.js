@@ -1,16 +1,37 @@
 ﻿
 $(function ()
 {
-    var procId;
-
-    procId = setTimeout(findSelectors, 1000);
-
-    $(document).bind("DOMSubtreeModified", function ()
+    chrome.storage.sync.get({
+        replaceSave: true
+    }, function (sync)
     {
-        clearTimeout(procId);
-        procId = setTimeout(findSelectors, 1000);
+        if (sync.replaceSave)
+        {
+            var procId;
+
+            procId = setTimeout(findSelectors, 1000);
+
+            $(document).bind("DOMSubtreeModified", function ()
+            {
+                clearTimeout(procId);
+                procId = setTimeout(findSelectors, 1000);
+            });
+        }
     });
 
+    var sync = {
+        replace: true,
+        replaceSave: true
+    };
+
+    chrome.storage.sync.get({
+        replace: true,
+        replaceSave: true
+    }, function (s)
+    {
+        sync.replace = s.replace;
+        sync.replaceSave = s.replaceSave;
+    });
 
 
     $(document).on('click', function (e)
@@ -48,12 +69,18 @@ $(function ()
 
                         chrome.runtime.sendMessage({ type: 'parsed', text: hit_word }, function (response) { });
 
-                        var tt = t.text();
-                        if (tt.indexOf(hit_word) < 5 && Math.abs(tt.length - hit_word.length) < 10)
+                        if (sync.replace)
                         {
-                            var s = getSelector(t);
-                            replacePrices(s);
-                            pushSelector(s);
+                            var tt = t.text();
+                            if (tt.indexOf(hit_word) < 5 && Math.abs(tt.length - hit_word.length) < 10)
+                            {
+                                var s = getSelector(t);
+                                replacePrices(s);
+                                if (sync.replaceSave)
+                                {
+                                    pushSelector(s);
+                                }
+                            }
                         }
                     }
 
@@ -69,7 +96,18 @@ $(function ()
 
     function getSelector($node)
     {
-        return $node.parents().map(function (index, o) { return o.tagName + ' > '; }).toArray().reverse().join(' ') + ' ' + $node.prop("tagName");
+        var res = '';
+
+        if ($node && $node.length)
+        {
+            var p = $node.parents();
+            if (p && p.length)
+            {
+                res = p.map(function (index, o) { return o.tagName + ' > '; }).toArray().reverse().join(' ') + ' ' + $node.prop("tagName");
+            }
+        }
+
+        return res;
     }
 
 

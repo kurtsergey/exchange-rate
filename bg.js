@@ -107,11 +107,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse)
     else if (request.type == 'found')
     {
 
-        var byr,
-            usd,
-            eur,
-            rub;
-
         t = request.text.split(/\s*/).join('');
 
         try
@@ -127,25 +122,22 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse)
             {
                 if (usdRate && !isNaN(usdRate))
                 {
-                    usd = i / usdRate;
+                title = '$' + numberToString(i / usdRate);
                 }
-                title = '$' + numberToString(usd);
             }
             else if (request.curr == 'eur')
             {
                 if (eurRate && !isNaN(eurRate))
                 {
-                    eur = i / eurRate;
+                    title = '€' + numberToString(i / eurRate);
                 }
-                title = '€' + numberToString(eur);
             }
             else if (request.curr == 'rub')
             {
                 if (rubRate && !isNaN(rubRate))
                 {
-                    rub = i / rubRate;
+                    title = '₽' + numberToString(i / rubRate);
                 }
-                title = '₽' + numberToString(rub);
             }
 
             sendResponse({ text: title });
