@@ -85,7 +85,7 @@ $(function ()
                 chrome.runtime.sendMessage({ type: 'found', text: $item.text(), curr: sync.defaultCurrency }, function (response)
                 {
                     $item.data('exchange-rate-originalHtml', $item.html());
-                    $item.html(response.text + ' <span class="exchange-rate-icon ' + (sync.defaultCurrency || '').toLowerCase() + '"></span>');
+                    $item.html(response.text + ' <span class="exchange-rate-icon"></span>');
                 });
 
             });
