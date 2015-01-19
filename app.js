@@ -48,7 +48,8 @@ $(function ()
 
                         chrome.runtime.sendMessage({ type: 'parsed', text: hit_word }, function (response) { });
 
-                        if (t.text() == hit_word)
+                        var tt = t.text();
+                        if (tt.indexOf(hit_word) < 5 && Math.abs(tt.length - hit_word.length) < 10)
                         {
                             var s = getSelector(t);
                             replacePrices(s);
