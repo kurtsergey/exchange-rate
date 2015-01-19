@@ -106,6 +106,12 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse)
     }
     else if (request.type == 'found')
     {
+
+        var byr,
+            usd,
+            eur,
+            rub;
+
         t = request.text.split(/\s*/).join('');
 
         try
