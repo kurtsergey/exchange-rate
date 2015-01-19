@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="popup.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body>
+
+    В какую валюту конвертировать?
+    <br />
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <select id="defaultCurrency">
+        <option value="usd">usd</option>
+        <option value="eur">eur</option>
+        <option value="rub">rub</option>
+    </select>
+    <br />
+    <br />
+
+    Где показывать?
+    <br />
+    <label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="notification" checked="checked" />Уведомление</label>
+    <br />
+    <label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="alert" />Alert</label>
+    <br />
+    <br />
+    <div id="status"></div>
+    <br />
+    <button id="save">Сохранить</button>
+
+    <script src="options.js"></script>
+
+</body>
+</html>
