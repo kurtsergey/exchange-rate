@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <link href="popup.css" rel="stylesheet" />
+    <link href="options.css" rel="stylesheet" />
     <title></title>
 </head>
 <body>
@@ -19,11 +19,20 @@
 
     Где показывать?
     <br />
-    <label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="notification" checked="checked" />Уведомление</label>
+    <label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="notification" />Уведомление</label>
     <br />
     <label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="alert" />Alert</label>
     <br />
     <br />
+
+    Заменять цену?
+    <br />
+    <label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="replace" />Заменять цену в данном узле и подобных</label>
+    <br />
+    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="replaceSave" />Запоминать выбор</label>
+    <br />
+    <br />
+
     <div id="status"></div>
     <br />
     <button id="save">Сохранить</button>
