@@ -98,7 +98,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse)
 
                 if (items.alert)
                 {
-                    alert(badge);
+                    alert(title);
                 }
             });
 
