@@ -12,7 +12,8 @@
     "permissions": [
         "<all_urls>",
         "notifications",
-        "storage"
+        "storage",
+        "alarms"
     ],
 
     "browser_action": {
