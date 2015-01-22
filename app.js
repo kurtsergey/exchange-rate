@@ -9,12 +9,12 @@ $(function ()
         {
             var procId;
 
-            procId = setTimeout(findSelectors, 1000);
+            procId = setTimeout(findSelectors, 200);
 
             $(document).bind("DOMSubtreeModified", function ()
             {
                 clearTimeout(procId);
-                procId = setTimeout(findSelectors, 1000);
+                procId = setTimeout(findSelectors, 200);
             });
         }
     });
