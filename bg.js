@@ -188,20 +188,6 @@
 
 
     take();
-
-    var d = new Date();
-
-    chrome.alarms.create('takeRates', {
-        delayInMinutes: (23 - d.getHours()) * 60 + (60 - d.getMinutes()) + 15, // 15 мин после полуночи
-        periodInMinutes: 60 * 24
-    });
-
-    chrome.alarms.onAlarm.addListener(function (alarm)
-    {
-        if (alarm.name == 'takeRates')
-        {
-            take();
-        }
-    });
+    setInterval(take, 10 * 60 * 1000);
 
 })();
