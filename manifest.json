@@ -3,7 +3,7 @@
 
     "name": "exchange rate",
     "description": "Конвертер белорусских рублей",
-    "version": "1.2.4",
+    "version": "1.2.5",
 
     "icons": {
         "128": "128.png"
