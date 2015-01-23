@@ -30,7 +30,7 @@
 
         if (request.type == 'parsed')
         {
-            t = request.text.split(/\s*/).join('');
+            t = normalizeAmount(request.text);
 
             try
             {
@@ -108,7 +108,7 @@
         else if (request.type == 'found')
         {
 
-            t = request.text.split(/\s*/).join('');
+            t = normalizeAmount(request.text);
 
             try
             {
@@ -186,6 +186,11 @@
             });
     }
 
+    function normalizeAmount(text) {
+        var result = text.split(/[\s.,]*/).join('');
+
+        return result;
+    }
 
     take();
     setInterval(take, 10 * 60 * 1000);
