@@ -108,42 +108,53 @@
         else if (request.type == 'found')
         {
 
-            t = normalizeAmount(request.text);
+            var res = [];
+            var text = request.text;
 
-            try
+            if (typeof text === 'string')
             {
-                i = parseFloat(t);
-            } catch (ex) { };
-
-            if (i && !isNaN(i))
-            {
-                var title;
-
-                if (request.curr == 'usd')
-                {
-                    if (usdRate && !isNaN(usdRate))
-                    {
-                        title = '$' + numberToString(i / usdRate);
-                    }
-                }
-                else if (request.curr == 'eur')
-                {
-                    if (eurRate && !isNaN(eurRate))
-                    {
-                        title = '€' + numberToString(i / eurRate);
-                    }
-                }
-                else if (request.curr == 'rub')
-                {
-                    if (rubRate && !isNaN(rubRate))
-                    {
-                        title = '₽' + numberToString(i / rubRate);
-                    }
-                }
-
-                sendResponse({ text: title });
-
+                text = [text];
             }
+
+            for (var i = 0 ; i < text.length; ++i)
+            {
+                t = normalizeAmount(text[i]);
+
+                try
+                {
+                    var n = parseFloat(t);
+                } catch (ex) { };
+
+                if (n && !isNaN(n))
+                {
+                    if (request.curr == 'usd')
+                    {
+                        if (usdRate && !isNaN(usdRate))
+                        {
+                            t = '$' + numberToString(n / usdRate);
+                        }
+                    }
+                    else if (request.curr == 'eur')
+                    {
+                        if (eurRate && !isNaN(eurRate))
+                        {
+                            t = '€' + numberToString(n / eurRate);
+                        }
+                    }
+                    else if (request.curr == 'rub')
+                    {
+                        if (rubRate && !isNaN(rubRate))
+                        {
+                            t = '₽' + numberToString(n / rubRate);
+                        }
+                    }
+                }
+
+                res.push(t);
+            }
+
+            sendResponse({ text: res });
+
         }
         else if (request.type == 'rates')
         {
@@ -186,7 +197,8 @@
             });
     }
 
-    function normalizeAmount(text) {
+    function normalizeAmount(text)
+    {
         var result = text.split(/[\s.,]*/).join('');
 
         return result;

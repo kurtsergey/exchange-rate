@@ -12,7 +12,7 @@ var numberToString = function numberToString(n)
     {
         f = (n - Math.floor(n)).toFixed(2).toString().substr(1);
     }
-    else if (n < 1000)
+    else if (n < 100)
     {
         f = (n - Math.floor(n)).toFixed(1).toString().substr(1);
     }

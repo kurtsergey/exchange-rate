@@ -72,7 +72,7 @@ $(function ()
                         if (sync.replace)
                         {
                             var tt = t.text();
-                            if (tt.replace(/([\d\s.,byrблрруей]*)/gi, '') == '')
+                            if (tt.replace(/([\d\s.,byrбелруй–-]*)/gi, '') == '')
                             {
                                 var s = getSelector(t);
                                 replacePrices(s);
@@ -121,12 +121,12 @@ $(function ()
             {
                 var $item = $(item);
                 var tt = $item.text();
-                if (tt.replace(/([\d\s.,byrблрруей]*)/gi, '') == '')
+                if (tt && tt.replace(/([\d\s.,byrбелруй–-]*)/gi, '') == '')
                 {
-                    chrome.runtime.sendMessage({ type: 'found', text: tt, curr: sync.defaultCurrency }, function (response)
+                    chrome.runtime.sendMessage({ type: 'found', text: tt.split(/[–-]/), curr: sync.defaultCurrency }, function (response)
                     {
                         $item.data('exchange-rate-originalHtml', $item.html());
-                        $item.html(response.text + ' <span class="exchange-rate-icon"></span>');
+                        $item.html(response.text.join(' – ') + ' <span class="exchange-rate-icon"></span>');
                     });
                 }
             });
