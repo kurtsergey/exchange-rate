@@ -72,7 +72,7 @@ $(function ()
                         if (sync.replace)
                         {
                             var tt = t.text();
-                            if (tt.indexOf(hit_word) < 5 && Math.abs(tt.length - hit_word.length) < 10)
+                            if (tt.replace(/([\d\s.,byrблрруей]*)/gi, '') == '')
                             {
                                 var s = getSelector(t);
                                 replacePrices(s);
@@ -120,12 +120,15 @@ $(function ()
             $(selector).each(function (index, item)
             {
                 var $item = $(item);
-                chrome.runtime.sendMessage({ type: 'found', text: $item.text(), curr: sync.defaultCurrency }, function (response)
+                var tt = $item.text();
+                if (tt.replace(/([\d\s.,byrблрруей]*)/gi, '') == '')
                 {
-                    $item.data('exchange-rate-originalHtml', $item.html());
-                    $item.html(response.text + ' <span class="exchange-rate-icon"></span>');
-                });
-
+                    chrome.runtime.sendMessage({ type: 'found', text: tt, curr: sync.defaultCurrency }, function (response)
+                    {
+                        $item.data('exchange-rate-originalHtml', $item.html());
+                        $item.html(response.text + ' <span class="exchange-rate-icon"></span>');
+                    });
+                }
             });
         });
     }
