@@ -121,7 +121,7 @@ $(function ()
             {
                 var $item = $(item);
                 var tt = $item.text();
-                if (tt && tt.replace(/([\d\s.,byrбелруй–-]*)/gi, '') == '')
+                if (tt.trim() && tt.replace(/([\d\s.,byrбелруй–-]*)/gi, '') == '')
                 {
                     chrome.runtime.sendMessage({ type: 'found', text: tt.split(/[–-]/), curr: sync.defaultCurrency }, function (response)
                     {
